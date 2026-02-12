@@ -31,6 +31,6 @@ COPY --from=builder /usr/lib/libjq*.so* /usr/lib/
 COPY --from=builder /usr/lib/libonig*.so* /usr/lib/
 
 # Expose task broker port for external runners (n8n 2.0)
-EXPOSE 5679
+EXPOSE 5678
 
 USER node
