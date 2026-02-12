@@ -162,6 +162,7 @@ services:
       - PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium-browser
       - N8N_RUNNERS_ALLOW_PROTOTYPE_MUTATION=true
       - N8N_RUNNERS_INSECURE_MODE=true
+      - N8N_RUNNERS_TASK_TIMEOUT=${N8N_RUNNERS_TASK_TIMEOUT:-7200}
     depends_on:
       n8n:
         condition: service_healthy
@@ -230,6 +231,7 @@ services:
       - PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium-browser
       - N8N_RUNNERS_ALLOW_PROTOTYPE_MUTATION=true
       - N8N_RUNNERS_INSECURE_MODE=true
+      - N8N_RUNNERS_TASK_TIMEOUT=${N8N_RUNNERS_TASK_TIMEOUT:-7200}
     depends_on:
       n8n-worker:
         condition: service_healthy
