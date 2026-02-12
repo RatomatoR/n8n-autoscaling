@@ -56,6 +56,7 @@ x-n8n: &service-n8n
     - N8N_RUNNERS_AUTH_TOKEN=${N8N_RUNNERS_AUTH_TOKEN}
     - N8N_RUNNERS_ALLOW_PROTOTYPE_MUTATION=true
     - N8N_RUNNERS_INSECURE_MODE=true
+    - N8N_RUNNERS_TASK_TIMEOUT=${N8N_RUNNERS_TASK_TIMEOUT:-7200}
 
 # Task runner base configuration for n8n 2.0
 x-task-runner: &service-task-runner
@@ -75,6 +76,7 @@ x-task-runner: &service-task-runner
     - PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium-browser
     - N8N_RUNNERS_ALLOW_PROTOTYPE_MUTATION=true
     - N8N_RUNNERS_INSECURE_MODE=true
+    - N8N_RUNNERS_TASK_TIMEOUT=${N8N_RUNNERS_TASK_TIMEOUT:-7200}
 
 services:
   cloudflared:
