@@ -1,6 +1,6 @@
 volumes:
-  postgres_data:
-  redis_data:
+  n8n_postgres_data:
+  n8n_redis_data:
   n8n_main:
   n8n_webhook:
 
@@ -79,7 +79,7 @@ x-task-runner: &service-task-runner
     - N8N_RUNNERS_TASK_TIMEOUT=${N8N_RUNNERS_TASK_TIMEOUT:-7200}
 
 services:
-  redis:
+  n8n-redis:
     image: redis:7-alpine
     restart: unless-stopped
 #    ports:
@@ -89,11 +89,11 @@ services:
       interval: 1s
       timeout: 3s
     volumes:
-      - redis_data:/data
+      - n8n_redis_data:/data
     networks:
       - dokploy-network
 
-  postgres:
+  n8n-postgres:
     image: pgvector/pgvector:pg17
     restart: unless-stopped
     ports:
@@ -107,7 +107,7 @@ services:
       - POSTGRES_INITDB_ARGS=--auth-host=scram-sha-256 --auth-local=scram-sha-256
 #      - POSTGRES_HOST=0.0.0.0 # Listen on all interfaces inside container
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - n8n_postgres_data:/var/lib/postgresql/data
       - ./init-pgvector.sql/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
@@ -125,9 +125,9 @@ services:
     volumes:
       - n8n_main:/n8n
     depends_on:
-      postgres:
+      n8n-postgres:
         condition: service_healthy
-      redis:
+      n8n-redis:
         condition: service_healthy
     networks:
       - dokploy-network
