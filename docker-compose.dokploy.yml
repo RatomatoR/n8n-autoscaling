@@ -171,9 +171,9 @@ services:
     depends_on:
       n8n:
         condition: service_healthy
-      postgres:
+      n8n-postgres:
         condition: service_healthy
-      redis:
+      n8n-redis:
         condition: service_healthy
     networks:
       - dokploy-network
@@ -193,9 +193,9 @@ services:
     depends_on:
       n8n:
         condition: service_healthy
-      postgres:
+      n8n-postgres:
         condition: service_healthy
-      redis:
+      n8n-redis:
         condition: service_healthy
     networks:
       - dokploy-network
@@ -238,7 +238,7 @@ services:
       dockerfile: monitor/monitor.Dockerfile
     restart: unless-stopped
     depends_on:
-      redis:
+      n8n-redis:
         condition: service_healthy
     networks:
       - dokploy-network
@@ -289,7 +289,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./.env:/app/.env
     depends_on:
-      redis:
+      n8n-redis:
         condition: service_healthy
       n8n-worker: # Ensure worker service is defined, though it might start with 0 replicas if autoscaled from 0
         condition: service_started # or service_healthy if you have a healthcheck that passes with 0 initial replicas
