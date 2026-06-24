@@ -20,6 +20,7 @@ x-n8n: &service-n8n
     - dokploy-network
     - shark
   environment:
+    - NODES_EXCLUDE=""
     - N8N_DIAGNOSTICS_ENABLED=${N8N_DIAGNOSTICS_ENABLED}
     - N8N_USER_FOLDER=${N8N_USER_FOLDER}
     - N8N_SECURE_COOKIE=${N8N_SECURE_COOKIE}
